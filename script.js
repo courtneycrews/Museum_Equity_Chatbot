@@ -58,3 +58,9 @@ document.getElementById("send-btn").addEventListener("click", async function () 
     document.getElementById("user-input").value = "";
     chatOutput.scrollTop = chatOutput.scrollHeight;
 });
+
+document.getElementById("refresh-btn").addEventListener("click", function () {
+    const chatOutput = document.getElementById("chat-output");
+    chatOutput.innerHTML = ""; // Clear the chat history
+    document.getElementById("user-input").value = ""; // Clear the input field
+});
