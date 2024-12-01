@@ -1,0 +1,20 @@
+[
+    {
+        "location": "New York",
+        "job_title": "Curator",
+        "salary": 60000,
+        "type_of_museum": "Art Museum"
+    },
+    {
+        "location": "San Francisco",
+        "job_title": "Education Coordinator",
+        "salary": 50000,
+        "type_of_museum": "Science Museum"
+    },
+    {
+        "location": "Chicago",
+        "job_title": "Exhibit Designer",
+        "salary": 55000,
+        "type_of_museum": "History Museum"
+    }
+]
