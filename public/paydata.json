@@ -1,20 +1,21 @@
-[
-    {
-        "location": "New York",
-        "job_title": "Curator",
-        "salary": 60000,
-        "type_of_museum": "Art Museum"
+{
+    "new york": {
+        "curator": {
+            "type_of_museum": "art museum",
+            "salary": 65000,
+            "research_report": "https://example.com/new-york-art-curator"
+        },
+        "registrar": {
+            "type_of_museum": "history museum",
+            "salary": 54000,
+            "research_report": "https://example.com/new-york-registrar"
+        }
     },
-    {
-        "location": "San Francisco",
-        "job_title": "Education Coordinator",
-        "salary": 50000,
-        "type_of_museum": "Science Museum"
-    },
-    {
-        "location": "Chicago",
-        "job_title": "Exhibit Designer",
-        "salary": 55000,
-        "type_of_museum": "History Museum"
+    "texas": {
+        "registrar": {
+            "type_of_museum": "science museum",
+            "salary": 50000,
+            "research_report": "https://example.com/texas-registrar"
+        }
     }
-]
+}

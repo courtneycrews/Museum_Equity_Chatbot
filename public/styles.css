@@ -1,92 +1,99 @@
+/* General Reset and Basic Styling */
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f9;
+    font-family: Arial, sans-serif;
+    background-color: lightblue;
     color: #333;
 }
 
-.header {
+button {
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.artpay-chatbot {
     background-color: #5a9;
-    color: #fff;
+    color: white;
     padding: 20px;
     text-align: center;
 }
 
-.main-content {
-    padding: 20px;
-}
-
-.chatbot-container {
-    margin: 20px auto;
+.topics-container {
     max-width: 600px;
-    background: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    padding: 20px;
+    margin: 0 auto 20px auto;
 }
 
-.chatbox {
-    display: flex;
-    flex-direction: column;
+.topic-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
 }
 
-.chat-output {
-    min-height: 200px;
-    background: #e8e8e8;
-    padding: 10px;
-    border-radius: 8px;
-    overflow-y: auto;
+.topic-button {
+    padding: 15px;
+    font-size: 14px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
 }
 
+.topic-button:hover {
+    background-color: #0056b3;
+}
+
+
+.chat-container {
+    max-width: 600px;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.chat-box {
+    height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 8px;
+}
+
+/* Input and send button container */
+.input-container {
+    display: flex;
+    gap: 10px;
+}
+
+/* Input field styling */
 #user-input {
+    flex-grow: 1;
     padding: 10px;
     font-size: 16px;
+    border: 1px solid #ddd;
     border-radius: 4px;
-    border: 1px solid #ccc;
 }
 
-#send-btn {
+/* Send button styling */
+.send-button {
     padding: 10px;
-    background: #5a9;
+    font-size: 16px;
+    background-color: #007bff;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
 }
 
-#send-btn:hover {
-    background: #478;
-}
-
-#refresh-btn {
-    padding: 10px;
-    background: #f44336;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-left: 5px;
-}
-
-#refresh-btn:hover {
-    background: #d32f2f;
-}
-
-.resources ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.resources ul li a {
-    color: #5a9;
-    text-decoration: none;
-}
-
-.footer {
-    text-align: center;
-    padding: 10px;
-    background: #333;
-    color: #fff;
+.send-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
 }

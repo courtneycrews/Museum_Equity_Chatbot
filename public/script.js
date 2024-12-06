@@ -1,66 +1,54 @@
-// Fetch the mock data from a JSON file
-async function fetchPayData() {
-    const response = await fetch("paydata.json"); // Ensure the file is in the same directory
-    const data = await response.json();
-    return data;
-}
+const API_KEY = "your-api-key-here"; // Replace with your API key if not already using environment variables.
 
-// Search the mock data based on criteria
-async function searchPayData(criteria) {
-    const data = await fetchPayData();
+document.getElementById("send-button").addEventListener("click", sendMessage);
 
-    return data.filter((item) => {
-        return (
-            (!criteria.location || item.location.toLowerCase() === criteria.location.toLowerCase()) &&
-            (!criteria.job_title || item.job_title.toLowerCase().includes(criteria.job_title.toLowerCase())) &&
-            (!criteria.type_of_museum || item.type_of_museum.toLowerCase().includes(criteria.type_of_museum.toLowerCase()))
-        );
-    });
-}
-
-// Handle user interaction
-document.getElementById("send-btn").addEventListener("click", async function () {
+async function sendMessage() {
     const userInput = document.getElementById("user-input").value.trim();
-    const chatOutput = document.getElementById("chat-output");
+    const chatBox = document.getElementById("chat-box");
 
-    if (!userInput) {
-        chatOutput.innerHTML += `<div class="bot-message">Please enter a query.</div>`;
-        return;
+    if (!userInput) return;
+
+    // Append user message
+    appendMessage("user", userInput);
+
+    try {
+        // Send request to OpenAI API
+        const response = await fetch("https://api.openai.com/v1/chat/completions", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${API_KEY}`,
+            },
+            body: JSON.stringify({
+                model: "gpt-3.5-turbo",
+                messages: [
+                    { role: "system", content: "You are a helpful assistant prioritizing research data and structured information." },
+                    { role: "user", content: userInput },
+                ],
+                max_tokens: 150,
+                temperature: 0.7,
+            }),
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            appendMessage("bot", data.choices[0].message.content.trim());
+        } else {
+            appendMessage("bot", "Error: Unable to fetch response from OpenAI API.");
+        }
+    } catch (error) {
+        appendMessage("bot", "Error: Unable to connect to OpenAI API.");
     }
 
-    // Display the user's input
-    const userMessage = `<div class="user-message">You: ${userInput}</div>`;
-    chatOutput.innerHTML += userMessage;
-
-    // Parse criteria from user input
-    let criteria = {};
-    if (userInput.includes("New York")) criteria.location = "New York";
-    if (userInput.includes("Curator")) criteria.job_title = "Curator";
-    if (userInput.includes("Art Museum")) criteria.type_of_museum = "Art Museum";
-
-    // Fetch and filter the data
-    const results = await searchPayData(criteria);
-
-    // Display the results
-    if (results.length > 0) {
-        const formattedResults = results
-            .map(
-                (item) =>
-                    `Job Title: ${item.job_title}, Location: ${item.location}, Salary: $${item.salary}, Type of Museum: ${item.type_of_museum}`
-            )
-            .join("<br>");
-        chatOutput.innerHTML += `<div class="bot-message">Here are the results:<br>${formattedResults}</div>`;
-    } else {
-        chatOutput.innerHTML += `<div class="bot-message">Sorry, no results found for your query.</div>`;
-    }
-
-    // Clear the input and scroll to the bottom
-    document.getElementById("user-input").value = "";
-    chatOutput.scrollTop = chatOutput.scrollHeight;
-});
-
-document.getElementById("refresh-btn").addEventListener("click", function () {
-    const chatOutput = document.getElementById("chat-output");
-    chatOutput.innerHTML = ""; // Clear the chat history
     document.getElementById("user-input").value = ""; // Clear the input field
-});
+}
+
+// Helper function to append messages to the chat box
+function appendMessage(sender, message) {
+    const chatBox = document.getElementById("chat-box");
+    const messageDiv = document.createElement("div");
+    messageDiv.classList.add("message", sender);
+    messageDiv.innerHTML = message.replace(/\n/g, "<br>"); // Allow line breaks in messages
+    chatBox.appendChild(messageDiv);
+    chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the latest message
+}
