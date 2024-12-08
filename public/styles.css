@@ -3,8 +3,22 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-color: lightblue;
-    color: #333;
+    background-color: darkslategray;
+    color: #6c757d;
+}
+
+.dm-serif-text-regular {
+    font-family: "DM Serif Text", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+.spacer {
+    height: 100px; /* Adjust height as needed */
+}
+
+.primary-bg {
+    background-color: darkslategray; /* Light gray */
 }
 
 button {
@@ -15,15 +29,63 @@ button:hover {
     opacity: 0.9;
 }
 
+.navbar {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.nav-link {
+    color: cornflowerblue !important;
+}
+
+.nav-link:hover {
+    color: white !important;
+}
+
+.navbar-brand {
+    color: black !important; /* Use your desired color */
+    font-weight: bold; /* Optional for better emphasis */
+    font-size: 1.2rem; /* Optional to adjust size */
+}
+
+.navbar-brand:hover {
+    color: white !important; /* Set hover color */
+}
+
+.btn-primary {
+    background-color: black;
+    border-color: black;
+}
+
+.btn-primary:hover {
+    background-color: cornflowerblue;
+    border-color: cornflowerblue;
+}
+
 .artpay-chatbot {
-    background-color: #5a9;
+    background-color: darkslategray;
     color: white;
-    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
     text-align: center;
+    padding: 20px;
+}
+
+.artpay-chatbot h1 {
+    font-family: 'DM Serif Text';
+    margin: 5px 0; /* Reduce spacing between lines of the headline */
+    font-size: 3rem;
+}
+
+.artpay-chatbot p {
+    margin: 10px 0;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: gainsboro;
 }
 
 .topics-container {
-    max-width: 600px;
+    max-width: 650px;
     margin: 0 auto 20px auto;
 }
 
@@ -36,7 +98,7 @@ button:hover {
 .topic-button {
     padding: 15px;
     font-size: 14px;
-    background-color: #007bff;
+    background-color: cornflowerblue;
     color: white;
     border: none;
     border-radius: 5px;
@@ -44,27 +106,32 @@ button:hover {
     text-align: center;
 }
 
-.topic-button:hover {
-    background-color: #0056b3;
+.topic-button i {
+    margin-right: 8px; /* Space between icon and text */
+    font-size: 1.2em; /* Adjust icon size if needed */
+    vertical-align: middle; /* Align with button text */
 }
 
+.topic-button:hover {
+    background-color: black;
+}
 
 .chat-container {
     max-width: 600px;
     margin: 20px auto;
-    background: white;
+    background: gainsboro;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .chat-box {
     height: 300px;
     overflow-y: auto;
-    border: 1px solid #ddd;
+    border: 1px solid white;
     margin-bottom: 10px;
     padding: 10px;
-    background: #f9f9f9;
+    background: white;
     border-radius: 8px;
 }
 
@@ -79,7 +146,7 @@ button:hover {
     flex-grow: 1;
     padding: 10px;
     font-size: 16px;
-    border: 1px solid #ddd;
+    border: 1px solid white;
     border-radius: 4px;
 }
 
@@ -87,7 +154,7 @@ button:hover {
 .send-button {
     padding: 10px;
     font-size: 16px;
-    background-color: #007bff;
+    background-color: cornflowerblue;
     color: white;
     border: none;
     border-radius: 4px;
@@ -95,5 +162,119 @@ button:hover {
 }
 
 .send-button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: black; /* Darker blue on hover */
+}
+
+#customer-stories h3 {
+    color: cornflowerblue;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+#customer-stories p {
+    margin: 10px 0;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: gainsboro;
+}
+
+#customer-stories img {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.pricing {
+    background-color: darkslategray;
+    color: white;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px;
+}
+
+.pricing h2 {
+    font-family: 'DM Serif Text';
+    color: white;
+    font-size: 2.5rem;
+}
+
+.pricing p {
+    margin: 10px 0;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: gainsboro !important; /* Darker text for readability */
+    margin-bottom: 40px;
+}
+
+.pricing .card {
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.pricing .card-header {
+    border-radius: 10px 10px 0 0; /* Keeps the rounded corners */
+    background-color: cornflowerblue; /* Change to your desired color */
+    color: white; /* Ensure the text color is readable */
+    font-weight: bold; /* Optional for better emphasis */
+    text-align: center; /* Centers the text horizontally */
+    box-shadow: none;
+    height: 80px; /* Fixed height */
+    
+    /* Flexbox for vertical alignment */
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+}
+
+.pricing .btn {
+    border-radius: 5px;
+}
+
+.pricing .card-title {
+    font-size: 2rem;
+}
+
+.footer {
+    background-color: darkslategray;
+    padding: 30px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.footer-border {
+    width: 100%; /* Set the width of the border */
+    margin: 0 auto; /* Center the border */
+    border-top: .5px solid gainsboro;
+    margin-bottom: 30px;
+}
+
+.footer-content {
+    margin-bottom: 10px;
+}
+
+.footer-content p {
+    margin: 5px 0;
+    color: gainsboro;
+}
+
+.footer-links {
+    margin-top: 0px;
+}
+
+.footer-links ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links ul li {
+    margin: 5px 0;
+}
+
+.footer-content a {
+    color: cornflowerblue !important;
+    text-decoration: none;
+}
+
+.footer-content a:hover {
+    text-decoration: underline;
 }

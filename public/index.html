@@ -4,35 +4,196 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arts Pay Equity Chatbot</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./styles.css">
 </head>
-<div class="artpay-chatbot">
-    <h1>Arts Pay Equity Chatbot</h1>
-    <p>Your assistant for exploring museum pay equity and related insights.</p>
-</div>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+        <div class="container">
+            <a class="navbar-brand" href="#">ArtsPayEquity.ai</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#pricing">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#partners">Partners</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary" href="#login" role="button">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-<!-- Topic Buttons Container -->
-<div class="topics-container">
-    <div class="topic-buttons">
-        <button class="topic-button">Gender Pay Equity</button>
-        <button class="topic-button">By Role</button>
-        <button class="topic-button">By Location</button>
-        <button class="topic-button">Upload Own Data</button>
+    <!-- Page Content -->
+    <div class="artpay-chatbot">
+        <h1>AI-Powered Insights</h1>
+        <h1>for Equity in the Arts</h1>
+        <p>Your AI assistant for exploring the latest academic research and insights into compensation trends of nonprofit arts and cultural organizations.</p>
     </div>
-</div>
 
-<!-- Chat Container -->
-<div class="chat-container">
-    <!-- Chat Box -->
-    <div id="chat-box" class="chat-box"></div>
-
-    <!-- Input and Send -->
-    <div class="input-container">
-        <input id="user-input" type="text" placeholder="Ask me a question...">
-        <button id="send-button" class="send-button">Send</button>
+    <!-- Topic Buttons Container -->
+    <div class="topics-container">
+        <div class="topic-buttons">
+            <button class="topic-button"><i class="bi bi-gender-ambiguous"></i> Gender Pay Equity</button>
+            <button class="topic-button"><i class="bi bi-briefcase"></i> Trends by Role</button>
+            <button class="topic-button"><i class="bi bi-geo-alt"></i> Trends by Location</button>
+            <button class="topic-button"><i class="bi bi-palette"></i> Trends by Sector</button>
+        </div>
     </div>
-</div>
 
+    <!-- Chat Container -->
+    <div class="chat-container">
+        <!-- Chat Box -->
+        <div id="chat-box" class="chat-box"></div>
+
+        <!-- Input and Send -->
+        <div class="input-container">
+            <input id="user-input" type="text" placeholder="Ask me a question...">
+            <button id="send-button" class="send-button">Send</button>
+        </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <section id="customer-stories" class="py-5">
+        <div class="container">
+            <!-- Story 1 -->
+            <div class="row align-items-center mb-5">
+                <div class="col-md-6">
+                    <h3>Unlocking Pay Equity Insights</h3>
+                    <p>“Using ArtsEquity.ai, we identified disparities in pay across roles and implemented new policies that improved staff satisfaction by 30%.”</p>
+                    <p><strong>- Director of Diversity, ArtCity Museum</strong></p>
+                </div>
+                <div class="col-md-6">
+                    <img src="./images/pay-equity-women.jpg" alt="Two women working together at a desk and smiling" class="img-fluid rounded shadow-sm">
+                </div>
+            </div>
+    
+            <!-- Story 2 -->
+            <div class="row align-items-center mb-5">
+                <div class="col-md-6 order-md-2">
+                    <h3>Streamlining Research for Grants</h3>
+                    <p>“ArtsEquity.ai helped us craft data-backed grant proposals that increased our funding by 25%.”</p>
+                    <p><strong>- Grant Manager, Regional Arts Alliance</strong></p>
+                </div>
+                <div class="col-md-6 order-md-1">
+                    <img src="./images/Research-grants.jpg" alt="Regional Arts Alliance example" class="img-fluid rounded shadow-sm">
+                </div>
+            </div>
+    
+            <!-- Story 3 -->
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h3>Creating Custom Data Dashboards</h3>
+                    <p>“With ArtsEquity.ai, we visualized our salary data and communicated more effectively with our board of directors.”</p>
+                    <p><strong>- HR Lead, Creative Spaces Initiative</strong></p>
+                </div>
+                <div class="col-md-6">
+                    <img src="./images/dashboard.jpg" alt="Creative Spaces Initiative example" class="img-fluid rounded shadow-sm">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="spacer"></div>
+
+    
+<!-- Pricing Section -->
+<section id="pricing" class="pricing py-5 primary-bg mb-5">
+    <div class="container">
+        <h2>Flexible Pricing Plans</h2>
+        <p>Choose the plan that fits your needs and start exploring pay equity insights today.</p>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+
+            <!-- Free Plan -->
+            <div class="col">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-header">
+                        <h4 class="my-0">Free</h4>
+                    </div>
+                    <div class="card-body text-center">
+                        <h1 class="card-title pricing-card-title">$0 <small class="text-muted">/ mo.</small></h1>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Access to basic research</li>
+                            <li class="list-group-item">3 queries per day</li>
+                            <li class="list-group-item">Basic analytics</li>
+                        </ul>
+                        <div class="mt-4">
+                            <button class="btn btn-primary">Get Started</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Personal Plan -->
+            <div class="col">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-header">
+                        <h4 class="my-0">Personal</h4>
+                    </div>
+                    <div class="card-body text-center">
+                        <h1 class="card-title pricing-card-title">$9.99 <small class="text-muted">/ mo.</small></h1>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Unlimited queries</li>
+                            <li class="list-group-item">Enhanced research access</li>
+                            <li class="list-group-item">Priority email support</li>
+                        </ul>
+                        <div class="mt-4">
+                            <button class="btn btn-primary">Upgrade Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Premium Plan -->
+            <div class="col">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-header">
+                        <h4 class="my-0">Premium</h4>
+                    </div>
+                    <div class="card-body text-center">
+                        <h1 class="card-title pricing-card-title">$19.99 <small class="text-muted">/ mo.</small></h1>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Unlimited queries</li>
+                            <li class="list-group-item">Custom data uploads</li>
+                            <li class="list-group-item">Advanced analytics</li>
+                        </ul>
+                        <div class="mt-4">
+                            <button class="btn btn-primary">Upgrade Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-border"></div>
+        <div class="footer-content">
+            <p>&copy; 2024 ArtsPayEquity.ai Inc. All rights reserved.</p>
+            <p>123 Museum Lane, ArtCity, AC 56789</p>
+            <p>Email: <a href="mailto:info@artspayequitychatbot.com">info@artspayequityai.org</a></p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
