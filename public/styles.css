@@ -126,6 +126,9 @@ button:hover {
 }
 
 .chat-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     height: 300px;
     overflow-y: auto;
     border: 1px solid white;
@@ -163,6 +166,30 @@ button:hover {
 
 .send-button:hover {
     background-color: black; /* Darker blue on hover */
+}
+
+/* User messages */
+.message.user {
+    color: #6c757d;
+    text-align: right;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 5px 0;
+    align-self: flex-end; /* Aligns the message to the right */
+    max-width: 70%;
+    word-wrap: break-word; /* Ensures long messages don't overflow */
+}
+
+/* Bot messages */
+.message.bot {
+    color: cornflowerblue;
+    text-align: left;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 5px 0;
+    align-self: flex-start; /* Aligns the message to the left */
+    max-width: 70%;
+    word-wrap: break-word; /* Ensures long messages don't overflow */
 }
 
 #customer-stories h3 {
