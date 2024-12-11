@@ -22,11 +22,11 @@ async function sendMessage() {
     appendMessage("user", userInput);
 
     const commonResponses = {
-        Hello: "Hi there! How can I assist you today?",
-        Hi: "Hello! What would you like to know about arts pay equity?",
-        Hey: "Hey there! Feel free to ask me anything.",
-        Thanks: "You're welcome! Let me know if there's anything else I can do.",
-        Bye: "Goodbye! Have a great day.",
+        hello: "Hi there! How can I assist you today?",
+        hi: "Hello! What would you like to know about arts pay equity?",
+        hey: "Hey there! Feel free to ask me anything.",
+        thanks: "You're welcome! Let me know if there's anything else I can do.",
+        bye: "Goodbye! Have a great day.",
     };
 
     const lowerCaseInput = userInput.toLowerCase();
@@ -37,7 +37,7 @@ async function sendMessage() {
     }
 
     try {
-        const response = await fetch("/chat", {
+        const response = await fetch("https://museum-equity-chatbot.onrender.com/chat", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ prompt: userInput }),
