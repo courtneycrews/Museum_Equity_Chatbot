@@ -2,8 +2,6 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const fetch = require("node-fetch");
-const resources = require("./resources");
-const payData = require("./public/paydata.json");
 const path = require("path");
 require("dotenv").config();
 
@@ -21,39 +19,22 @@ if (!process.env.OPENAI_API_KEY) {
 }
 
 // Serve static files
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "docs")));
 
-// Helper functions
-function findResource(prompt) {
-    return resources.find(resource =>
-        prompt.toLowerCase().includes(resource.topic.toLowerCase())
-    );
-}
+// Research Data
+const researchData = `
+1. The Alchemy of High-Performing Arts Organizations: A Spotlight on Organizations of Color: "Research indicates that the nonprofit arts and culture sector has not been inclusive of communities of color. Dr. Zannie Voss of SMU DataArts notes, there remains a significant gap in racial representation between both the general arts workforce and arts audiences, relative to the general population. Source: SMU DataArts (2021)"
+2. Gender Gap Report, 2017: "Women hold only 30% of museum director positions in the U.S., and those positions are concentrated in institutions with smaller budgets. Men hold 70% of directorships and are more likely to lead museums with budgets over $15 million. Source: Association of Art Museum Directors (AAMD, 2017)"
+3. Americans Speak Out About the Arts in 2023: "A national survey revealed that 86% of Americans believe arts and culture are important to their community's quality of life and livability. However, only 51% feel that everyone in their community has equal access to the arts, highlighting ongoing challenges in accessibility. Source: Americans for the Arts (2023)"
+4. MMF 2023 Report on Workplace Equity and Organizational Culture in US Art Museums: "While 82% of art museum workers believe they are doing meaningful work, 60% are considering leaving their jobs, and 68% are contemplating exiting the field entirely. Major sources of dissatisfaction include low pay, burnout, and limited opportunities for career advancement. Additionally, 74% of workers cannot consistently cover basic living expenses with their museum compensation alone, indicating significant financial precarity within the sector. Source: Museums Moving Forward (2023)"
+5. The Arts and Economic Prosperity 6: "Demonstrates how arts organizations contribute to the local economy, including job creation and revenue generation. Source: Americans for the Arts (2022)"
+`;
 
-function lookupPayData(location, jobTitle) {
-    location = location?.toLowerCase();
-    jobTitle = jobTitle?.toLowerCase();
-
-    if (payData[location] && payData[location][jobTitle]) {
-        const data = payData[location][jobTitle];
-        return `In ${location}, the average salary for a ${jobTitle} at a ${data.type_of_museum} is $${data.salary}. See more: ${data.research_report}`;
-    }
-    return null;
-}
-
-// POST route for the chatbot
+// Chat API Endpoint
 app.post("/chat", async (req, res) => {
     const { prompt } = req.body;
-    console.log("Prompt Received:", prompt);
-
-    const resource = findResource(prompt);
-    const resourceContext = resource ? resource.context : "";
-    const sources = resource
-        ? resource.sources.map((source, index) => `${index + 1}. [${source.title}](${source.link})`).join("\n")
-        : "No specific references found for this topic.";
 
     try {
-        // Call OpenAI API with the context
         const apiResponse = await fetch("https://api.openai.com/v1/chat/completions", {
             method: "POST",
             headers: {
@@ -63,46 +44,41 @@ app.post("/chat", async (req, res) => {
             body: JSON.stringify({
                 model: "gpt-3.5-turbo",
                 messages: [
-                    { role: "system", content: "You are a professional assistant providing museum pay and equity information, referencing the provided academic sources where possible." },
-                    { role: "user", content: `Topic: ${prompt}\n\nContext: ${resourceContext}\n\nSources:\n${sources}` }
+                    {
+                        role: "system",
+                        content: "You are a helpful assistant specializing in arts equity. Always provide detailed and insightful responses when answering questions, especially when referencing the provided research. Include examples, key statistics, and explanations to ensure your response is thorough. If the provided research does not fully cover the user's query, use your knowledge to offer a thoughtful and accurate response. Always respond thoughtfully, even to simple phrases like greetings or thanks.",
+                    },
+                    {
+                        role: "assistant",
+                        content: `Here is the research data you should prioritize:\n${researchData}`,
+                    },
+                    {
+                        role: "user",
+                        content: `Question: ${prompt}\n\nPlease provide a detailed answer referencing the provided research where applicable.`,
+                    },
                 ],
-                max_tokens: 150,
-                temperature: 0.7,
+                max_tokens: 500, // Allow for detailed responses
+                temperature: 0.2, // Maintain precision and factual accuracy
             }),
         });
 
         if (!apiResponse.ok) {
-            console.error("OpenAI API error:", await apiResponse.text());
+            const errorText = await apiResponse.text();
+            console.error("OpenAI API error:", errorText);
             res.status(500).json({ error: "Error fetching data from OpenAI API." });
             return;
         }
 
-        const apiData = await apiResponse.json();
-        const openAIResponse = apiData.choices[0].message.content.trim();
-
-        // Add mock data if applicable
-        let mockDataResponse = "";
-        let location = null;
-        let jobTitle = null;
-
-        if (prompt.toLowerCase().includes("new york")) location = "new york";
-        if (prompt.toLowerCase().includes("texas")) location = "texas";
-        if (prompt.toLowerCase().includes("curator")) jobTitle = "curator";
-        if (prompt.toLowerCase().includes("registrar")) jobTitle = "registrar";
-
-        const mockResult = lookupPayData(location, jobTitle);
-        if (mockResult) {
-            mockDataResponse = `\n\nAdditional Data:\n${mockResult}`;
-        }
-
-        res.json({ text: `${openAIResponse}\n\nSources:\n${sources}${mockDataResponse}` });
+        const data = await apiResponse.json();
+        const openAIResponse = data.choices[0].message.content.trim();
+        res.json({ text: openAIResponse });
     } catch (error) {
         console.error("Error in /chat route:", error.message || error);
-        res.status(500).json({ error: "Error communicating with OpenAI API or processing references." });
+        res.status(500).json({ error: "Error communicating with OpenAI API." });
     }
 });
 
-// Start the server
+// Start Server
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
